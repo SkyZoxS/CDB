@@ -1,0 +1,4 @@
+name: CDB
+version: '1.0-SNAPSHOT'
+main: fr.skyzoxs.main.Main
+api-version: '1.21'
