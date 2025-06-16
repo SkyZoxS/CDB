@@ -1,0 +1,14 @@
+rewards:
+  - id: item1
+    name: "§6Super Épée"
+    material: DIAMOND_SWORD
+    lore:
+      - "Épée puissante"
+    chance: 10
+
+  - id: item2
+    name: "§bPotion de soin"
+    material: POTION
+    lore:
+      - "Soigne 5 coeurs"
+    chance: 20
