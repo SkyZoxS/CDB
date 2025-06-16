@@ -50,21 +50,6 @@ public class PointsScoreboard {
         player.setScoreboard(board);
     }
 
-    public static void updateGlobalReputation(Player player, Points points) {
-        Scoreboard board = player.getScoreboard();
-        Team team = board.getTeam("globalPoints");
-        if (team != null) {
-            team.setSuffix(prettyPrintNumber(points.getGlobalPoints()));
-        }
-    }
-
-    public static void updatePersonalReputation(Player player, Points points) {
-        Scoreboard board = player.getScoreboard();
-        Team team = board.getTeam("playerPoints");
-        if (team != null) {
-            team.setSuffix(prettyPrintNumber(points.getPlayerPoints(String.valueOf(player.getUniqueId()))));
-        }
-    }
 
 
 }

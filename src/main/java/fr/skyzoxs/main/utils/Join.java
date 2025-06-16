@@ -18,7 +18,7 @@ public class Join implements Listener {
 
     //Make a title when joining the game and setup his grade & scoreboard
     @EventHandler
-    public void join(PlayerJoinEvent event) throws Exception {
+    public void join(PlayerJoinEvent event){
         if (event == null) {
             return;
         }

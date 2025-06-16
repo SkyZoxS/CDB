@@ -67,7 +67,7 @@ public final class Main extends JavaPlugin {
                 Spin spin = new Spin(dataManager, rewardManager, this);
 
                 // Listener
-                getServer().getPluginManager().registerEvents(new SpinListener(this, spin), this);
+                getServer().getPluginManager().registerEvents(new SpinListener(spin), this);
 
                 getLogger().info("Spin villager has been enabled!");
             } catch (Exception e) {
@@ -105,18 +105,5 @@ public final class Main extends JavaPlugin {
         System.out.println("Plugin is stopping...");
     }
 
-    // Getter for dataManager
-    public SpinData getDataManager() {
-        return dataManager;
-    }
 
-    // Getter for PointsManager
-    public PointsManager getPointsManager() {
-        return pointsManager;
-    }
-
-    // Getter for Points
-    public static Points getPoints() {
-        return points;
-    }
 }

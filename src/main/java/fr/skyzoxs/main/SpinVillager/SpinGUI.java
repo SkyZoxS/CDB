@@ -1,6 +1,5 @@
 package fr.skyzoxs.main.SpinVillager;
 
-import fr.skyzoxs.main.Main;
 import fr.skyzoxs.main.SpinVillager.reward.RewardItem;
 import fr.skyzoxs.main.SpinVillager.reward.RewardManager;
 import org.bukkit.Bukkit;

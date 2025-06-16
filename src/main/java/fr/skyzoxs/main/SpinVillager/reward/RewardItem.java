@@ -69,22 +69,19 @@ public class RewardItem {
         // Si PLAYER_HEAD, appliquer le propriétaire
         if (material == Material.PLAYER_HEAD && meta instanceof SkullMeta skullMeta && skullOwner != null) {
             skullMeta.setOwner(skullOwner); // Fonctionne toujours sur la plupart des versions, bien que deprecated
-            meta = skullMeta;
         }
 
         item.setItemMeta(meta);
         return item;
     }
 
-    public int getChance() {
-        return chance;
-    }
 
-    public String getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
+    }
+
+    public int getChance() {
+        return chance;
     }
 }
