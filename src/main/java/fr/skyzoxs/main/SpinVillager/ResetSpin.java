@@ -5,16 +5,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.UUID;
 
 public class ResetSpin implements CommandExecutor {
 
-    private final JavaPlugin plugin;
+    private final SpinData dataManager;
 
-    public ResetSpin(JavaPlugin plugin) {
-        this.plugin = plugin;
+    public ResetSpin(SpinData dataManager) {
+        this.dataManager = dataManager;
     }
 
     @Override
@@ -36,13 +35,11 @@ public class ResetSpin implements CommandExecutor {
         }
 
         UUID uuid = target.getUniqueId();
-        plugin.getConfig().set("players." + uuid, null);
-        plugin.saveConfig(); // ✅ IMPORTANT
+        // Supprimer la date stockée dans data.yml
+        dataManager.getDataConfig().set("players." + uuid.toString(), null);
+        dataManager.saveDataConfig();  // Sauvegarde du fichier data.yml
 
         sender.sendMessage("§aTimer de spin réinitialisé pour " + target.getName());
         return true;
     }
 }
-
-
-

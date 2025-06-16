@@ -1,7 +1,6 @@
 package fr.skyzoxs.main.SpinVillager;
 
 import fr.skyzoxs.main.reward.RewardManager;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -10,17 +9,17 @@ import java.util.UUID;
 
 public class Spin {
 
-    private final FileConfiguration config;
+    private final SpinData dataManager;
     private final SpinGUI spinGUI;
 
-    public Spin(FileConfiguration config, RewardManager rewardManager, Plugin plugin) {
-        this.config = config;
+    public Spin(SpinData dataManager, RewardManager rewardManager, Plugin plugin) {
+        this.dataManager = dataManager;
         this.spinGUI = new SpinGUI(plugin, rewardManager);
     }
 
     public boolean canSpin(Player player) {
         String today = LocalDate.now().toString();
-        String lastDay = config.getString("players." + player.getUniqueId());
+        String lastDay = dataManager.getDataConfig().getString("players." + player.getUniqueId());
         return !today.equals(lastDay);
     }
 
@@ -33,8 +32,9 @@ public class Spin {
             return;
         }
 
-        config.set("players." + uuid, today);
-        spinGUI.open(player);
+        dataManager.getDataConfig().set("players." + uuid, today);
+        dataManager.saveDataConfig();
 
+        spinGUI.open(player);
     }
 }

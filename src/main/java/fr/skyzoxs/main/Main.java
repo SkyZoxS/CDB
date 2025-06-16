@@ -2,15 +2,15 @@ package fr.skyzoxs.main;
 
 import fr.skyzoxs.main.SpinVillager.ResetSpin;
 import fr.skyzoxs.main.SpinVillager.Spin;
-import fr.skyzoxs.main.SpinVillager.SpinGUI;
+import fr.skyzoxs.main.SpinVillager.SpinData;
 import fr.skyzoxs.main.SpinVillager.SpinListener;
 import fr.skyzoxs.main.reward.RewardManager;
 import fr.skyzoxs.main.utils.VillagerSpawner;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.List;
-
 public final class Main extends JavaPlugin {
+
+    private SpinData dataManager;  // <-- ajout
 
     @Override
     public void onEnable() {
@@ -22,29 +22,35 @@ public final class Main extends JavaPlugin {
             VillagerSpawner spawner = new VillagerSpawner(this);
             spawner.SpinVillager();
 
-            // Initialisation
-            saveResource("rewardItem.yml", false); // Copie depuis le jar vers plugins/CDB/
+            // Initialisation DataManager
+            dataManager = new SpinData(this);
+
+            // Initialisation RewardManager
             RewardManager rewardManager = new RewardManager(getDataFolder());
-            SpinGUI spinGUI = new SpinGUI(this, rewardManager);
-            Spin spin = new Spin(getConfig(), rewardManager, this);
+
+            // Initialisation Spin avec DataManager au lieu de getConfig()
+            Spin spin = new Spin(dataManager, rewardManager, this);
 
             // Listener
             getServer().getPluginManager().registerEvents(new SpinListener(this, spin), this);
 
             getLogger().info("Spin villager has been enabled!");
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Spin villager could not be enabled!");
+            e.printStackTrace();
         }
-        getCommand("resetspin").setExecutor(new ResetSpin(this));
 
-
+        getCommand("resetspin").setExecutor(new ResetSpin(dataManager));
     }
-
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
         VillagerSpawner.removeVillager();
         System.out.println("Plugin is stopping...");
+    }
+
+    // Ajoute un getter au cas où tu en aurais besoin ailleurs
+    public SpinData getDataManager() {
+        return dataManager;
     }
 }

@@ -12,18 +12,20 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class SpinGUI {
     private final Plugin plugin;
     private final RewardManager rewardManager;
     private final Random random = new Random();
 
+
+
     public SpinGUI(Plugin plugin, RewardManager rewardManager) {
         this.plugin = plugin;
         this.rewardManager = rewardManager;
     }
+
 
     public void open(Player player) {
         Inventory inv = Bukkit.createInventory(null, 9, ChatColor.DARK_PURPLE + "Roulette");
