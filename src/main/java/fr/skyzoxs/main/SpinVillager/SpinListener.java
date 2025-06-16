@@ -17,6 +17,7 @@ public class SpinListener implements Listener {
         this.spin = spin;
     }
 
+    // Start spin for player
     @EventHandler
     public void onVillagerInteract(PlayerInteractAtEntityEvent event) {
         if (!(event.getRightClicked() instanceof Villager villager)) return;
@@ -27,6 +28,7 @@ public class SpinListener implements Listener {
         spin.spin(player);
     }
 
+    //Cancel interaction with item on the spin menu
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
@@ -35,7 +37,7 @@ public class SpinListener implements Listener {
         }
     }
 
-
+    //Villager is invulnerable
     @EventHandler
     public void onVillagerDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Villager villager)) return;

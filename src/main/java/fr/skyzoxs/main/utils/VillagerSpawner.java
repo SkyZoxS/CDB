@@ -3,6 +3,7 @@ package fr.skyzoxs.main.utils;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
@@ -13,6 +14,7 @@ public class VillagerSpawner {
 
     private final Plugin plugin;
 
+    // Locations of each villager
     static double[][] villagerLocations = {
             {100.5, 64, 100.5}, //Spin
 
@@ -66,16 +68,15 @@ public class VillagerSpawner {
 
         Villager villager = world.spawn(loc, Villager.class);
 
-        villager.setCustomName("§dSpin");
-        villager.setCustomNameVisible(true);
-        villager.setInvulnerable(true);
-        villager.setAI(false);
-        villager.setSilent(true);
+        villager.setCustomName("§dSpin"); //Custom name
+        villager.setCustomNameVisible(true); //Set name visible
+        villager.setInvulnerable(true); // Set invulnerable
+        villager.setAI(false); // Set AI false
+        villager.setSilent(true); // Set silent
         villager.setProfession(Villager.Profession.NITWIT);
 
         //Add a tag
         villager.setMetadata("spin-npc", new FixedMetadataValue(plugin, true));
 
     }
-
 }

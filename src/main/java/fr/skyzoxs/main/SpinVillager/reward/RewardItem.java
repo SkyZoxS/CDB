@@ -1,4 +1,4 @@
-package fr.skyzoxs.main.reward;
+package fr.skyzoxs.main.SpinVillager.reward;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

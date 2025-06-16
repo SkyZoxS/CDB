@@ -1,13 +1,10 @@
-package fr.skyzoxs.main.reward;
+package fr.skyzoxs.main.SpinVillager.reward;
 
-import com.google.common.io.Files;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +45,7 @@ public class RewardManager {
         }
     }
 
+    //Copy default rewarditem.yml if doesn't exist in the folder
     private void copyResourceIfNotExists(Plugin plugin, String resourcePath, File destination) {
         if (!destination.exists()) {
             try {

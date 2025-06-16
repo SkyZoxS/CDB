@@ -1,6 +1,6 @@
 package fr.skyzoxs.main.SpinVillager;
 
-import fr.skyzoxs.main.reward.RewardManager;
+import fr.skyzoxs.main.SpinVillager.reward.RewardManager;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -17,12 +17,14 @@ public class Spin {
         this.spinGUI = new SpinGUI(plugin, rewardManager);
     }
 
+    //Boolean to know if player can spin the wheel
     public boolean canSpin(Player player) {
         String today = LocalDate.now().toString();
         String lastDay = dataManager.getDataConfig().getString("players." + player.getUniqueId());
         return !today.equals(lastDay);
     }
 
+    //Spin the wheel
     public void spin(Player player) {
         UUID uuid = player.getUniqueId();
         String today = LocalDate.now().toString();

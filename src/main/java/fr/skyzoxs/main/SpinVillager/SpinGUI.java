@@ -1,7 +1,8 @@
 package fr.skyzoxs.main.SpinVillager;
 
-import fr.skyzoxs.main.reward.RewardItem;
-import fr.skyzoxs.main.reward.RewardManager;
+import fr.skyzoxs.main.Main;
+import fr.skyzoxs.main.SpinVillager.reward.RewardItem;
+import fr.skyzoxs.main.SpinVillager.reward.RewardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -26,7 +27,7 @@ public class SpinGUI {
         this.rewardManager = rewardManager;
     }
 
-
+    //Open gui
     public void open(Player player) {
         Inventory inv = Bukkit.createInventory(null, 9, ChatColor.DARK_PURPLE + "Roulette");
 

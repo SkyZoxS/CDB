@@ -18,6 +18,7 @@ public class SpinData {
             createDataFile();
         }
 
+        //Create data file to save last spin
         private void createDataFile() {
             dataFile = new File(plugin.getDataFolder(), "data.yml");
             if (!dataFile.exists()) {
@@ -36,6 +37,7 @@ public class SpinData {
             return dataConfig;
         }
 
+        //Save data.yml
         public void saveDataConfig() {
             try {
                 dataConfig.save(dataFile);

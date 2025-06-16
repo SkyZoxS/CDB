@@ -16,6 +16,7 @@ public class ResetSpin implements CommandExecutor {
         this.dataManager = dataManager;
     }
 
+    //Commands to resetspin of a player
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!sender.hasPermission("spin.admin")) {
