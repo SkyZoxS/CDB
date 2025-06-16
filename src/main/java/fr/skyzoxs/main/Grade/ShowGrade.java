@@ -1,6 +1,6 @@
     package fr.skyzoxs.main.Grade;
 
-    import fr.skyzoxs.main.Points.Points;
+    import fr.skyzoxs.main.Points.GlobalContri;
     import org.bukkit.entity.Player;
 
     public class ShowGrade {
@@ -87,8 +87,8 @@
         }
 
         //Setter for playerpoints
-        public static void setPlayerPointsGrade(Player player, Points points) {
-            int Points = points.getPlayerPoints(String.valueOf(player.getUniqueId()));
+        public static void setPlayerPointsGrade(Player player, GlobalContri globalContri) {
+            int Points = globalContri.getPlayerPoints(String.valueOf(player.getUniqueId()));
             int grade_index = Grade.getGradeIndex(Points);
             player.setPlayerListName(
                     ShowGrade.getPrettyPlayerName(player.getName(), grade_index)

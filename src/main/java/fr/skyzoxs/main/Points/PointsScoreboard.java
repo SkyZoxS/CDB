@@ -11,7 +11,7 @@ public class PointsScoreboard {
     }
 
     //Set scoreboard for everyone
-    public static void setScoreBoard(Player player, Points points) {
+    public static void setScoreBoard(Player player, GlobalContri globalContri) {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getNewScoreboard(); // IMPORTANT
 
@@ -22,7 +22,7 @@ public class PointsScoreboard {
         objective.getScore("§0").setScore(10);
 
         // Points globaux
-        int g_points = points.getGlobalPoints();
+        int g_points = globalContri.getGlobalPoints();
         Team globalTeam = board.registerNewTeam("globalPoints");
         globalTeam.addEntry("Points globaux : ");
         globalTeam.setSuffix(prettyPrintNumber(g_points));
@@ -38,7 +38,7 @@ public class PointsScoreboard {
         objective.getScore("§2").setScore(6);
 
         // Points perso
-        int p_points = points.getPlayerPoints(String.valueOf(player.getUniqueId()));
+        int p_points = globalContri.getPlayerPoints(String.valueOf(player.getUniqueId()));
         Team playerTeam = board.registerNewTeam("playerPoints");
         playerTeam.addEntry("Vos Points : ");
         playerTeam.setSuffix(prettyPrintNumber(p_points));
@@ -50,6 +50,20 @@ public class PointsScoreboard {
         player.setScoreboard(board);
     }
 
+    public static void updateGlobalPoints(Player player, GlobalContri globalContri) {
+        int g_points = globalContri.getGlobalPoints();
+        Scoreboard board = player.getScoreboard();
+        board.getTeam("globalPoints").setSuffix(
+                PointsScoreboard.prettyPrintNumber(g_points)
+        );
+    }
 
+    public static void updatePersonalPoints(Player player, GlobalContri globalContri) {
+        int p_reputation = globalContri.getPlayerPoints(String.valueOf(player.getUniqueId()));
+        Scoreboard board = player.getScoreboard();
+        board.getTeam("playerPoints").setSuffix(
+                PointsScoreboard.prettyPrintNumber(p_reputation)
+        );
+    }
 
 }

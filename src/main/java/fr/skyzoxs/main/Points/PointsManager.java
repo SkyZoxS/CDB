@@ -5,7 +5,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.UUID;
 
 public class PointsManager {
@@ -30,7 +29,7 @@ public class PointsManager {
 
 
     //Load information
-    public Points loadPoints() {
+    public GlobalContri loadPoints() {
         int globalPoints;
 
         if (config.contains("globalPoints")) {
@@ -41,18 +40,18 @@ public class PointsManager {
             saveConfig();                   // <-- Sauvegarde immédiate
         }
 
-        Points points = new Points(globalPoints);
+        GlobalContri globalContri = new GlobalContri(globalPoints);
 
         if (config.isConfigurationSection("players")) {
             for (String player : config.getConfigurationSection("players").getKeys(false)) {
                 for (String trader : config.getConfigurationSection("players." + player).getKeys(false)) {
                     int value = config.getInt("players." + player + "." + trader);
-                    points.setOneTradeOfAContributor(player, trader, value);
+                    globalContri.setOneTradeOfAContributor(player, trader, value);
                 }
             }
         }
 
-        return points;
+        return globalContri;
     }
 
     //Save config

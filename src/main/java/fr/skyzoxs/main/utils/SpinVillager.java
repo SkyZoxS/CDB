@@ -9,7 +9,7 @@ import org.bukkit.plugin.Plugin;
 import java.util.List;
 
 //Create a custom Villager with custom metadata, name and location
-public class VillagerSpawner {
+public class SpinVillager {
 
     private final Plugin plugin;
 
@@ -19,14 +19,13 @@ public class VillagerSpawner {
 
     };
 
-
-    //Builder for VillagerSpawner
-    public VillagerSpawner(Plugin plugin) {
+    public SpinVillager(Plugin plugin){
         this.plugin = plugin;
     }
 
+
     //Remove villager
-    public static void removeVillager(World world) {
+    public static void removeSpin(World world) {
             List<Entity> entities = world.getEntities();
 
             for (double[] location : villagerLocations) {
@@ -52,7 +51,7 @@ public class VillagerSpawner {
     }
 
     //Create SpinVillager
-    public void SpinVillager() {
+    public  void SpawnSpin() {
         Location loc = new Location(Bukkit.getWorld("world"), villagerLocations[0][0], villagerLocations[0][1], villagerLocations[0][2]);
         World world = loc.getWorld();
 
@@ -67,7 +66,7 @@ public class VillagerSpawner {
 
         Villager villager = world.spawn(loc, Villager.class);
 
-        villager.setCustomName("§dSpin"); //Custom name
+        villager.setCustomName("§dMaurice la roue"); //Custom name
         villager.setCustomNameVisible(true); //Set name visible
         villager.setInvulnerable(true); // Set invulnerable
         villager.setAI(false); // Set AI false

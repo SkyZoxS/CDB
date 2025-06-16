@@ -1,5 +1,6 @@
 package fr.skyzoxs.main.SpinVillager;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
@@ -36,12 +37,25 @@ public class SpinListener implements Listener {
         }
     }
 
-    //Villager is invulnerable
     @EventHandler
     public void onVillagerDamage(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Villager villager)) return;
-        if (villager.hasMetadata("spin-npc")) {
-            event.setCancelled(true);
+        Entity entity = event.getEntity();
+
+        // Ton tableau de metadata
+        String[] metaData = {
+                "spin-npc", "basic_blocks", "decorator", "garden",
+                "neither", "end", "food", "resources", "wood",
+                "points_trader","trader_name"
+        };
+
+        // Si c'est un villageois et qu'il a au moins un des metadata → on annule les dégâts
+        if (entity instanceof Villager) {
+            for (String key : metaData) {
+                if (entity.hasMetadata(key)) {
+                    event.setCancelled(true);
+                    return;
+                }
+            }
         }
     }
 }

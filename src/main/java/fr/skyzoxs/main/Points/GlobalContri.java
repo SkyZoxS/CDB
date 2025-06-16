@@ -3,16 +3,16 @@ package fr.skyzoxs.main.Points;
 import java.util.HashMap;
 import java.util.Set;
 
-public class Points {
+public class GlobalContri {
     private int globalPoints;
     private final HashMap<String, HashMap<String, Integer>> contributors;
 
 
-    public Points() {
+    public GlobalContri() {
         this(0);
     }
 
-    public Points(int globalPoints) {
+    public GlobalContri(int globalPoints) {
         this.globalPoints = globalPoints;
         this.contributors = new HashMap<>();
 
