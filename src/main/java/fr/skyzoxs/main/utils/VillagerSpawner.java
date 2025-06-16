@@ -2,6 +2,7 @@ package fr.skyzoxs.main.utils;
 
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
@@ -24,27 +25,29 @@ public class VillagerSpawner {
     }
 
     //Remove villager
-    public static void removeVillager() {
-        for (World world : Bukkit.getWorlds()) {
-            for (Entity entity : world.getEntities()) {
-                if (entity instanceof Villager) {
+    public static void removeVillager(World world) {
+            List<Entity> entities = world.getEntities();
+
+            for (double[] location : villagerLocations) {
+                world.setChunkForceLoaded((int) (location[0]/16), (int) (location[1]/16), true);
+            }
+            for (Entity entity : entities) {
+                if (entity.getType().equals(EntityType.VILLAGER)) {
+
                     // On vérifie toutes les métadatas
                     List<String> knownMetaKeys = List.of("spin-npc"); // List of Villager
+
                     for (String key : knownMetaKeys) {
                         if (entity.hasMetadata(key)) {
-                            Location loc = entity.getLocation();
-                            Chunk chunk = loc.getChunk();
-                            if (!chunk.isLoaded()) {
-                                chunk.load();
-                            }
-                            entity.setInvulnerable(false);
-                            entity.remove();
-                            break;
+                            do {
+                                entity.setInvulnerable(false);
+                                entity.remove();
+                            }while(!entity.isDead());
                         }
                     }
                 }
             }
-        }
+
     }
 
     //Create SpinVillager

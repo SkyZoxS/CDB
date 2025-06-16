@@ -6,6 +6,8 @@ import fr.skyzoxs.main.SpinVillager.SpinData;
 import fr.skyzoxs.main.SpinVillager.SpinListener;
 import fr.skyzoxs.main.reward.RewardManager;
 import fr.skyzoxs.main.utils.VillagerSpawner;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -15,29 +17,34 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         System.out.println("Plugin is starting...");
-        try {
-            VillagerSpawner.removeVillager();
+        World world = Bukkit.getWorld("world");
+        if(world != null) {
 
-            // Spawn du villageois
-            VillagerSpawner spawner = new VillagerSpawner(this);
-            spawner.SpinVillager();
 
-            // Initialisation DataManager
-            dataManager = new SpinData(this);
+            try {
+                VillagerSpawner.removeVillager(world);
 
-            // Initialisation RewardManager
-            RewardManager rewardManager = new RewardManager(getDataFolder());
+                // Spawn du villageois
+                VillagerSpawner spawner = new VillagerSpawner(this);
+                spawner.SpinVillager();
 
-            // Initialisation Spin avec DataManager au lieu de getConfig()
-            Spin spin = new Spin(dataManager, rewardManager, this);
+                // Initialisation DataManager
+                dataManager = new SpinData(this);
 
-            // Listener
-            getServer().getPluginManager().registerEvents(new SpinListener(this, spin), this);
+                // Initialisation RewardManager
+                RewardManager rewardManager = new RewardManager(getDataFolder(), this);
 
-            getLogger().info("Spin villager has been enabled!");
-        } catch (Exception e) {
-            System.out.println("Spin villager could not be enabled!");
-            e.printStackTrace();
+
+                // Initialisation Spin avec DataManager au lieu de getConfig()
+                Spin spin = new Spin(dataManager, rewardManager, this);
+
+                // Listener
+                getServer().getPluginManager().registerEvents(new SpinListener(this, spin), this);
+
+                getLogger().info("Spin villager has been enabled!");
+            } catch (Exception e) {
+                System.out.println("Spin villager could not be enabled!");
+            }
         }
 
         getCommand("resetspin").setExecutor(new ResetSpin(dataManager));
@@ -45,7 +52,10 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        VillagerSpawner.removeVillager();
+        World world = Bukkit.getWorld("world");
+    if(world != null) {
+        VillagerSpawner.removeVillager(world   );
+    }
         System.out.println("Plugin is stopping...");
     }
 
