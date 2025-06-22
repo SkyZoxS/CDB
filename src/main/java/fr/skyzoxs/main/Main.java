@@ -144,7 +144,7 @@ public final class Main extends JavaPlugin {
         //Initialisation de la commande resetspin [joueur]
         getCommand("resetspin").setExecutor(new ResetSpin(dataManager));
 
-        //Initialisation de la commande createTeam
+        //Initialisation des commandes
         TeamManager teamManager = new TeamManager(this);
         new TeamCommands(this, teamManager);
 

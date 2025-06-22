@@ -3,15 +3,27 @@ version: '1.0-SNAPSHOT'
 main: fr.skyzoxs.main.Main
 api-version: '1.21'
 commands:
+
   resetspin:
     description: Reset timer of the spin wheel.
     permission: spin.admin
+
   teamcreate:
     description: Crée une équipe
     usage: /teamcreate <NomEquipe> <Couleur> <Joueur1> <Joueur2> ...
+    permission: team.admin
+
   teamdelete:
     description: Supprime une équipe
     usage: /teamdelete <NomEquipe>
+    permission: team.admin
+
   teamlist:
     description: Affiche la liste de toutes les équipes
     usage: /teamlist
+    permission: team.admin
+
+  teamreveal:
+    description: Reveal les points
+    usage: /teamreveal
+    permission: team.admin

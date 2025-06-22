@@ -101,4 +101,8 @@ public class TeamManager {
         return config.getString("teams." + teamName + ".color", "WHITE");
     }
 
+    public Set<String> getAllTeamNames() {
+        return getAllTeams().keySet();
+    }
+
 }

@@ -2,17 +2,22 @@
 
     public class Grade {
         public static int[] bounds = {
-                1000,           // > Grain De Sable                 (i == 1)
-                10000,          // > Touriste du Désert             (i == 2)
-                25000,          // > Sableux Timide                 (i == 3)
-                50000,          // > Chameau en Formation           (i == 4)
-                75000,          // > Marchand d'Oasis               (i == 5)
-                100000,         // > Dune-Divin                     (i == 6)
-                125000,         // > Sablé au Beurre                (i == 7)
-                150000,         // > Pharaon en Vacances            (i == 8)
-                200000,         // > Gardien du Mojito              (i == 9)
-                250000,         // > Démon en Sandales              (i == 10)
-                300000,         // > Légende en short               (i == 11)
+                1000,           // > Grain De Sable                                 (i == 1)
+                10000,          // > Touriste du Désert                             (i == 2)
+                25000,          // > Sableux Timide                                 (i == 3)
+                50000,          // > Chameau en Formation                           (i == 4)
+                75000,          // > Marchand d'Oasis                               (i == 5)
+                100000,         // > Dune-Divin                                     (i == 6)
+                125000,         // > Sablé au Beurre                                (i == 7)
+                150000,         // > Pharaon en Vacances                            (i == 8)
+                200000,         // > Gardien du Mojito                              (i == 9)
+                250000,         // > Démon en Sandales                              (i == 10)
+                300000,         // > Légende en short                               (i == 11)
+                450000,         // > Lirili Larila                                 (i == 12)
+                600000,        // > Destructeur des mondes                         (i == 13)
+                800000,        // > Broyeur d'univers                              (i == 14)
+                1000000,        // > Pervertisseur Intergalactique                  (i == 15)
+                999999999        // > Puceau Multiverselle                           (i == 16)
 
         };
 
@@ -28,6 +33,11 @@
                 "Gardien du Mojito",
                 "Démon en Sandales",
                 "Légende en short",
+                "Lirili Larila",
+                "Destructeur des mondes",
+                "Broyeur d'univers",
+                "Pervertisseur Intergalactique",
+                "Puceau Multiverselle"
         };
 
         public static int getGradeIndex(int reputation) {

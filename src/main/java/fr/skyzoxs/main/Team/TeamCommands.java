@@ -1,5 +1,6 @@
 package fr.skyzoxs.main.Team;
 
+import fr.skyzoxs.main.Points.PointsScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
@@ -17,6 +18,7 @@ public class TeamCommands implements CommandExecutor {
         plugin.getCommand("teamcreate").setExecutor(this);
         plugin.getCommand("teamdelete").setExecutor(this);
         plugin.getCommand("teamlist").setExecutor(this);
+        plugin.getCommand("teamreveal").setExecutor(this);
     }
 
     @Override
@@ -35,7 +37,24 @@ public class TeamCommands implements CommandExecutor {
             return handleTeamList(sender);
         }
 
+        if (command.getName().equalsIgnoreCase("teamreveal")) {
+            return handleTeamReveal(sender, args);
+        }
+
         return false;
+    }
+
+    private boolean handleTeamReveal(CommandSender sender, String[] args) {
+
+
+        if(args.length == 1 && (Objects.equals(args[0], "false") || Objects.equals(args[0], "true"))){
+            PointsScoreboard.reveal(args[0]);
+            sender.sendMessage(ChatColor.GREEN + "Revealed : " + args[0]);
+            return true;
+        }else {
+            sender.sendMessage(ChatColor.RED + "Usage: /teamreveal true/false");
+            return true;
+        }
     }
 
     private boolean handleTeamList(CommandSender sender) {

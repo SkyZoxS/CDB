@@ -26,47 +26,35 @@
                         color = "§c";
                         break;
                     }
+
                     case 7:
-                    case 8:
-                    case 9: {
-                        color = "§b";
-                        break;
-                    }
-                    case 10:
-                    case 11:
-                    case 12: {
-                        color = "§2";
-                        break;
-                    }
-                    case 13:
-                    case 14:
-                    case 15: {
+                    case 8: {
                         color = "§4";
                         break;
                     }
-                    case 16:
-                    case 17:
-                    case 18: {
+                    case 9:
+                    case 10: {
                         color = "§1";
                         break;
                     }
-                    case 19: {
+                    case 11: {
                         color = "§l§6";
                         break;
                     }
-                    case 20: {
+                    case 12: {
                         color = "§o§0";
                         break;
                     }
-                    case 21: {
-                        color = "§n§o§0";
+                    case 13: {
+                        color = "§n§o§6";
                         break;
                     }
-                    case 22: {
+                    case 14: {
                         color = "§o§d";
                         break;
                     }
-                    case 23: {
+                    case 15:
+                    case 16:  {
                         color = "§o§5";
                         break;
                     }
