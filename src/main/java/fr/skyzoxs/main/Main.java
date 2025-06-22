@@ -1,11 +1,14 @@
 package fr.skyzoxs.main;
 
+import fr.skyzoxs.main.Food.FoodListener;
 import fr.skyzoxs.main.Grade.*;
 import fr.skyzoxs.main.Points.*;
 import fr.skyzoxs.main.Product.*;
 
 import fr.skyzoxs.main.SpinVillager.*;
 import fr.skyzoxs.main.SpinVillager.reward.RewardManager;
+import fr.skyzoxs.main.Team.TeamCommands;
+import fr.skyzoxs.main.Team.TeamManager;
 import fr.skyzoxs.main.Trader.*;
 import fr.skyzoxs.main.utils.Join;
 import fr.skyzoxs.main.utils.SpinVillager;
@@ -26,6 +29,8 @@ import java.util.Map;
 
 public final class Main extends JavaPlugin {
 
+
+    private PointsDataManager pointsDataManager;
     private static Main instance;
     private PointsManager pointsManager;
     private static HashMap<String, PointsTraderVillager> traders;
@@ -52,6 +57,9 @@ public final class Main extends JavaPlugin {
 
         System.out.println("Plugin is starting...");
         World world = Bukkit.getWorld("world");
+
+        new FoodListener(this);
+
         if(world != null) {
 
             Map<String, Location> locations = Map.ofEntries(
@@ -78,6 +86,14 @@ public final class Main extends JavaPlugin {
                 PointsTraderVillager trader = Main.traders.get(entry.getKey());
                 trader.create(world, entry.getValue(), Villager.Profession.NITWIT);
             }
+
+
+            // Initialiser le manager de sauvegarde inflation
+            pointsDataManager = new PointsDataManager(this);
+
+            // Charger l'inflation de chaque trader
+            pointsDataManager.loadAllTraders(traders);
+
 
             long timeInSeconds = 10800L;
             long timeInTicks = 20 * timeInSeconds;
@@ -128,18 +144,23 @@ public final class Main extends JavaPlugin {
         //Initialisation de la commande resetspin [joueur]
         getCommand("resetspin").setExecutor(new ResetSpin(dataManager));
 
-        //Initialisation du Grade et du Join
+        //Initialisation de la commande createTeam
+        TeamManager teamManager = new TeamManager(this);
+        new TeamCommands(this, teamManager);
+
+
+        //Initialisation des managers
             Bukkit.getPluginManager().registerEvents(new Shop(Main.traders), Main.instance);
             Bukkit.getPluginManager().registerEvents(new Sell(Main.globalContri, Main.traders), Main.instance);
-            Bukkit.getPluginManager().registerEvents(new Join(globalContri), this);
-            Bukkit.getPluginManager().registerEvents(new GradeChat(globalContri), this);
+            Bukkit.getPluginManager().registerEvents(new Join(globalContri, teamManager), this);
+            Bukkit.getPluginManager().registerEvents(new GradeChat(globalContri, teamManager), this);
 
         //Actualisation du Scoreboard et du Grade
         Bukkit.getScheduler().runTaskTimer(this, () -> {
 
             // Pour chaque joueur en ligne, on update le scoreboard
             for (Player player : Bukkit.getOnlinePlayers()) {
-                PointsScoreboard.setScoreBoard(player, globalContri);
+                PointsScoreboard.setScoreBoard(player, globalContri, teamManager);
                 ShowGrade.setPlayerPointsGrade(player, globalContri);
             }
         }, 0L, 20L);
@@ -184,11 +205,13 @@ public final class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         World world = Bukkit.getWorld("world");
-    if(world != null) {
-        //Supprime de spin
-        SpinVillager.removeSpin(world   );
-        this.removeAllEntityPointsTrader(world);
-    }
+         if(world != null) {
+             //Supprime de spin
+             SpinVillager.removeSpin(world   );
+             this.removeAllEntityPointsTrader(world);
+         }
+        pointsManager.savePoints(globalContri);
+        pointsDataManager.saveAllTraders(traders);
         System.out.println("Plugin is stopping...");
     }
 

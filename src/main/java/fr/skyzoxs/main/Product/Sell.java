@@ -189,6 +189,7 @@ public class Sell implements Listener {
             // Tells the trader he made a trade.
             trader.madeASales(slot_position);
 
+
             // Refresh the player's inventory.
             player.openInventory(trader.createInventory());
 

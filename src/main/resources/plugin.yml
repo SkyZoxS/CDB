@@ -6,3 +6,12 @@ commands:
   resetspin:
     description: Reset timer of the spin wheel.
     permission: spin.admin
+  teamcreate:
+    description: Crée une équipe
+    usage: /teamcreate <NomEquipe> <Couleur> <Joueur1> <Joueur2> ...
+  teamdelete:
+    description: Supprime une équipe
+    usage: /teamdelete <NomEquipe>
+  teamlist:
+    description: Affiche la liste de toutes les équipes
+    usage: /teamlist
